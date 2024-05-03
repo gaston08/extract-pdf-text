@@ -12,7 +12,9 @@ fs.readdirSync("./pdfs").forEach((file) => {
 
 async function main(file) {
   const pdf_text = await readPdfText({ url: `pdfs/${file}` });
-  const formatted_text = pdf_text.replaceAll(/\n(?=[a-z])/g, " ");
+  const formatted_text = pdf_text
+    .replaceAll(/\n(?=[a-z])/g, " ")
+    .replaceAll(/\s((?=\.)|(?=\,))/g, "");
   const arr = formatted_text.split(/\n/g);
   const exercises = [];
 
